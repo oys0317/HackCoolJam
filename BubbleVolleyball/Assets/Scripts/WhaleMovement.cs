@@ -7,7 +7,7 @@ public class WhaleMovement : MonoBehaviour {
 	Vector3 movement;
 	Rigidbody2D whaleRigidbody;
 	Animator anim;
-
+		
 	// Use this for initialization
 	void Awake () {
 
@@ -21,10 +21,12 @@ public class WhaleMovement : MonoBehaviour {
 
 		float h = Input.GetAxisRaw ("Horizontal");
 		float v = Input.GetAxisRaw ("Vertical");
-		
-		// Move the player around the scene.
+
 		Move (h, v);
 		Animating (h, v);
+		if(Input.GetButton ("Fire1")) {
+			Dive();
+		}
 	}
 
 	void Move (float h, float v) {
@@ -36,5 +38,9 @@ public class WhaleMovement : MonoBehaviour {
 	void Animating (float h, float v) {
 		bool moving = h != 0f || v != 0f;
 		anim.SetBool ("IsMoving", moving);
+	}
+
+	void Dive () {
+		anim.SetTrigger ("Dive");
 	}
 }
