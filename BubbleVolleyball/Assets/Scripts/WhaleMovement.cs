@@ -5,12 +5,14 @@ public class WhaleMovement : MonoBehaviour {
 
 	public float speed = 1f;  
 	Vector3 movement;
-	Rigidbody whaleRigidbody;
+	Rigidbody2D whaleRigidbody;
+	Animator anim;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
-		whaleRigidbody = GetComponent <Rigidbody> ();
+		whaleRigidbody = GetComponent <Rigidbody2D> ();
+		anim = GetComponent <Animator> ();
 
 	}
 	
@@ -22,11 +24,17 @@ public class WhaleMovement : MonoBehaviour {
 		
 		// Move the player around the scene.
 		Move (h, v);
+		Animating (h, v);
 	}
 
-	void Move (float h, float v){
+	void Move (float h, float v) {
 		movement.Set (h, v, 0f);
 		movement = movement.normalized * speed * Time.deltaTime;
 		whaleRigidbody.MovePosition (transform.position + movement);
+	}
+
+	void Animating (float h, float v) {
+		bool moving = h != 0f || v != 0f;
+		anim.SetBool ("IsMoving", moving);
 	}
 }
