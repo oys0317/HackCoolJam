@@ -7,6 +7,7 @@ public class WhaleMovement : MonoBehaviour {
 	Vector3 movement;
 	Rigidbody2D whaleRigidbody;
 	Animator anim;
+	Vector3 endPosition;
 		
 	// Use this for initialization
 	void Awake () {
@@ -27,6 +28,7 @@ public class WhaleMovement : MonoBehaviour {
 		if(Input.GetButton ("Fire1")) {
 			Dive();
 		}
+		//whaleRigidbody.MovePosition (endPosition);
 	}
 
 	void Move (float h, float v) {
@@ -42,5 +44,6 @@ public class WhaleMovement : MonoBehaviour {
 
 	void Dive () {
 		anim.SetTrigger ("Dive");
+		endPosition = transform.position;
 	}
 }
